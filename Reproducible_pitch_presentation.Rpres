@@ -1,28 +1,137 @@
-Reproducible Pitch Presentation
+Fuel consumption Vs cars specificities
 ========================================================
-author: "GAEL BERON"
-date: "27/09/2017"
+author: GAEL BERON
+date: 27/09/2017
 autosize: true
 
-First Slide
-========================================================
-
-For more details on authoring R presentations please visit <https://support.rstudio.com/hc/en-us/articles/200486468>.
-
-- Bullet 1
-- Bullet 2
-- Bullet 3
-
-Slide With Code
-========================================================
-
-```{r}
-summary(cars)
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(ggplot2)
+library(gridExtra)
+library(ggpubr)
 ```
 
-Slide With Plot
+Shiny Application: Fuel consumption Vs cars specificities
 ========================================================
 
-```{r, echo=FALSE}
-plot(cars)
+<p style="font-size:28px">This Shiny application aims to visualize what the fuel consumption is depending on each of a list of car specifities as per the data set 'mtcars'. Those data are from the US magazine Motor Trend which published its in 1974. It combines 11 aspects of automobile design and performance for a collection of 32 automobiles (1973–74 models).</p>
+
+<p style="font-size:28px">The application invites the user to select one of the variable above in order to see what the fuel consumption is (in mpg), depending of the variability of it.</p>
+
+<p style="font-size:28px">The application contains 4 tabs:</p>
+<ul style="font-size:28px">- Graphs: informations about mpg being the outcome of the selected variable</ul>
+<ul style="font-size:28px">- Raw Data: gross data and their distribution on the 2 axes</ul>
+<ul style="font-size:28px">- Help: documentation, content of the 'README.Rmd' file</ul>
+<ul style="font-size:28px">- Credits: details about the dataset and credits</ul>
+
+Shiny Application: Screenshot
+========================================================
+
+![] (./pictures/Screenshot_fuel_consumption_vs_cars_specificities.png)
+
+[link to the Shiny App] (http://gaelberon.shinyapps.io/fuel_consumption_vs_cars_specificities)
+
+Features
+========================================================
+
+<p style="font-size:28px">The user is asked to select a car specificity, and the App is computing the linear regression of mpg being the outcome of the selected variable.</p>
+
+<ul style="font-size:28px">- 'MPG Vs X variable and linear regression': plots the mpg (y-axis) depending on the selected value (x-axis) and displays the linear regression `mpg ~ x`</ul>
+<ul style="font-size:28px">- 'Slope' and 'Intercept': slope and intercept values of the linear regression `mpg ~ x` where x is the selected variable</ul>
+
+```{r, echo=FALSE, fig.height = 6, fig.width = 20, fig.center = TRUE}
+data(mtcars)
+
+mod <- lm(mpg ~ mtcars$wt, data = mtcars)
+mpg_predict <- predict(mod)
+
+gg <- ggplot(mtcars, aes(y = mpg, x = mtcars$wt)) +
+        geom_point(size = 3, colour = "blue", alpha = .5) +
+        geom_smooth(method = "lm") +
+        theme(axis.title = element_text(size = 20),
+              axis.text  = element_text(size = 16),
+              panel.background = element_rect(fill = "white",
+                                              colour = "black")) +
+        ylab("MPG (Miles Per -US- Gallon)") +
+        xlab("Weight")
+
+slope <- text_grob(size = 30, paste0("Slope ", round(mod[[1]][2],2)))
+intercept <- text_grob(size = 30, paste0("Intercept: ", round(mod[[1]][1],2)))
+
+grid.arrange(gg, slope, intercept,
+             widths = c(6, 2, 2),
+             ncol = 3, nrow = 1)
 ```
+
+Sums of Squares Graphs
+========================================================
+The App is drawing some nice graphs to visualize how the fuel consumption is variating depending on this variable.
+
+```{r, echo=FALSE, fig.height = 10, fig.width = 20, fig.center = TRUE}
+SST <- sum((mtcars$mpg - mean(mtcars$mpg))^2)
+SSE <- round(sum((mtcars$mpg - mpg_predict)^2), digits = 5)
+SSA <- SST - SSE
+
+SSQ <- data.frame(SS = c("Total","Regression","Error"),
+                  value = as.numeric(c(SST, SSA, SSE)/SST)*100)
+SSQ$SS <- factor(SSQ$SS, as.character(SSQ$SS))
+SSdata <- data.frame(SS = factor(SSQ$SS, as.character(SSQ$SS)),
+                     value = as.numeric(c(SST, SSA, SSE)/SST)*100)
+
+# Total
+cols <- c("#619CFF", "#00BA38", "#F8766D")
+total <- ggplot(mtcars, aes(x = wt, y = mpg)) +
+        geom_point(size = 3) +
+        geom_segment(xend = mtcars$wt,
+                     yend = mean(mtcars$mpg),
+                     colour = "#619CFF") +
+        geom_hline(yintercept = mean(mtcars$mpg)) +
+        theme(axis.title = element_text(size = 20),
+              axis.text  = element_text(size = 18),
+              panel.background = element_rect(fill = "white",
+                                              colour = "black")) +
+        ggtitle("SS total")
+
+# Regression
+regression <- ggplot(mtcars, aes(x = wt, y = mpg)) +
+        geom_point(alpha = 0) +
+        geom_smooth(method = "lm", se = F, colour = "black") +
+        geom_hline(yintercept = mean(mtcars$mpg)) +
+        geom_segment(aes(x  = mtcars$wt,
+                         y  = mpg_predict),
+                     xend   = mtcars$wt,
+                     yend   = mean(mtcars$mpg),
+                     colour = "#00BA38") +
+        theme(axis.title = element_text(size = 20),
+              axis.text  = element_text(size = 18),
+              panel.background = element_rect(fill = "white",
+                                              colour = "black")) +
+        ggtitle("SS regression")
+
+# Error
+error <- ggplot(mtcars, aes(x = wt, y = mpg)) +
+        geom_point(size = 3) + geom_smooth(method = "lm", se = F,
+                                           colour = "black") +
+        geom_segment(xend = mtcars$wt, yend = mpg_predict,
+                     colour = "#F8766D") +
+        theme(axis.title = element_text(size = 20),
+              axis.text  = element_text(size = 18),
+              panel.background = element_rect(fill = "white",
+                                              colour = "black")) +
+        ggtitle("SS error")
+
+# Variance
+variance <- ggplot(SSdata, aes(y = value, x = SS, fill = SS)) +
+        geom_bar(stat = "identity") +
+        scale_fill_manual(values = cols) +
+        theme(axis.title  = element_text(size = 20),
+              axis.text.x = element_text(size = 0),
+              axis.text.y = element_text(size = 16),
+              panel.background = element_rect(fill = "white",
+                                              colour = "black")) +
+        ylab("% of variance") +
+        xlab("Sums of Squares")
+
+grid.arrange(total, regression, error, variance,
+             ncol = 2, nrow = 2)
+```
+<p style="font-size:28px">Thanks for reading :)</p>

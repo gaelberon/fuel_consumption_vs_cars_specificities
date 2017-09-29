@@ -1,37 +1,44 @@
-Reproducible Pitch Presentation
+Fuel consumption Vs cars specificities
 ========================================================
-author: "GAEL BERON"
-date: "27/09/2017"
+author: GAEL BERON
+date: 27/09/2017
 autosize: true
 
-First Slide
+
+
+Shiny Application: Fuel consumption Vs cars specificities
 ========================================================
 
-For more details on authoring R presentations please visit <https://support.rstudio.com/hc/en-us/articles/200486468>.
+<p style="font-size:28px">This Shiny application aims to visualize what the fuel consumption is depending on each of a list of car specifities as per the data set 'mtcars'. Those data are from the US magazine Motor Trend which published its in 1974. It combines 11 aspects of automobile design and performance for a collection of 32 automobiles (1973–74 models).</p>
 
-- Bullet 1
-- Bullet 2
-- Bullet 3
+<p style="font-size:28px">The application invites the user to select one of the variable above in order to see what the fuel consumption is (in mpg), depending of the variability of it.</p>
 
-Slide With Code
+<p style="font-size:28px">The application contains 4 tabs:</p>
+<ul style="font-size:28px">- Graphs: informations about mpg being the outcome of the selected variable</ul>
+<ul style="font-size:28px">- Raw Data: gross data and their distribution on the 2 axes</ul>
+<ul style="font-size:28px">- Help: documentation, content of the 'README.Rmd' file</ul>
+<ul style="font-size:28px">- Credits: details about the dataset and credits</ul>
+
+Shiny Application: Screenshot
 ========================================================
 
+![] (./pictures/Screenshot_fuel_consumption_vs_cars_specificities.png)
 
-```r
-summary(cars)
-```
+[link to the Shiny App] (http://gaelberon.shinyapps.io/fuel_consumption_vs_cars_specificities)
 
-```
-     speed           dist       
- Min.   : 4.0   Min.   :  2.00  
- 1st Qu.:12.0   1st Qu.: 26.00  
- Median :15.0   Median : 36.00  
- Mean   :15.4   Mean   : 42.98  
- 3rd Qu.:19.0   3rd Qu.: 56.00  
- Max.   :25.0   Max.   :120.00  
-```
-
-Slide With Plot
+Features
 ========================================================
+
+<p style="font-size:28px">The user is asked to select a car specificity, and the App is computing the linear regression of mpg being the outcome of the selected variable.</p>
+
+<ul style="font-size:28px">- 'MPG Vs X variable and linear regression': plots the mpg (y-axis) depending on the selected value (x-axis) and displays the linear regression `mpg ~ x`</ul>
+<ul style="font-size:28px">- 'Slope' and 'Intercept': slope and intercept values of the linear regression `mpg ~ x` where x is the selected variable</ul>
 
 ![plot of chunk unnamed-chunk-2](Reproducible_pitch_presentation-figure/unnamed-chunk-2-1.png)
+
+Sums of Squares Graphs
+========================================================
+The App is drawing some nice graphs to visualize how the fuel consumption is variating depending on this variable.
+
+![plot of chunk unnamed-chunk-3](Reproducible_pitch_presentation-figure/unnamed-chunk-3-1.png)
+<p style="font-size:28px">Thanks for reading :)</p>

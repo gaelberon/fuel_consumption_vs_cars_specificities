@@ -5,8 +5,8 @@ account: gaelberon
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 220199
-bundleId: 1002900
+bundleId: 1002915
 url: https://gaelberon.shinyapps.io/fuel_consumption_vs_cars_specificities/
-when: 1506664178.34092
+when: 1506664621.93664
 asMultiple: FALSE
 asStatic: FALSE

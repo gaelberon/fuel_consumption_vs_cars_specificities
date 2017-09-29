@@ -7,7 +7,7 @@ output: html_document
 
 # Shiny Application testing the fuel consumption as the outcome of each car specificity
 
-For a direct access to this Shiny application, <a href=''>click here</a>
+For a direct access to this Shiny application, <a href='http://gaelberon.shinyapps.io/fuel_consumption_vs_cars_specificities'>click here</a>
 
 This README file is the supporting documentation accompagning this Shiny application. It includes three parts:
 
@@ -71,7 +71,7 @@ This Shiny application aims to visualize what the fuel consumption is depending 
 
 The application invites the user to select one of the variable above in order to see what the fuel consumption is (in mpg), depending of the variability of it.
 
-The application contains 3 tabs:  
+The application contains 4 tabs:  
 
 - Graphs  
 - Raw Data  
@@ -110,7 +110,7 @@ This tab gives details about the dataset used for this study and gives credits t
 
 ## 3. Directives on how to visualize this Shiny application
 
-**Option 1 (online)**: Direct link: <a href=''>click here</a>
+**Option 1 (online)**: Direct link: <a href='http://gaelberon.shinyapps.io/fuel_consumption_vs_cars_specificities'>click here</a>
 
 **Option 2 (local)**: Copy/Paste the following command into `R` console:  
 
@@ -119,7 +119,7 @@ Install.packages("shiny")
 shiny::runGitHub("fuel_consumption_vs_cars_specificities", "gaelberon")  
 </span>
 
-**Option 3 (local)**: Download the server.R and ui.R files and place them in folder named 'fuel_consumption_vs_cars_specificities'. Open an R session and set the working directory to the folder that contains the directory 'fuel_consumption_vs_cars_specificities'. Then run the following commands:  
+**Option 3 (local)**: Download the 'server.R' and 'ui.R' files and place them in folder named 'fuel_consumption_vs_cars_specificities'. Open an R session and set the working directory to the folder that contains the directory 'fuel_consumption_vs_cars_specificities'. Then run the following commands:  
 
 <span style="background-color:#eeeeee;padding:3px;">
 library(shiny)  
