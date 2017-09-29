@@ -1,0 +1,12 @@
+name: fuel_consumption_vs_cars_specificities
+title: fuel_consumption_vs_cars_specificities
+username:
+account: gaelberon
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 220199
+bundleId: 1002900
+url: https://gaelberon.shinyapps.io/fuel_consumption_vs_cars_specificities/
+when: 1506664178.34092
+asMultiple: FALSE
+asStatic: FALSE

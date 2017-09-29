@@ -116,12 +116,12 @@ This tab gives details about the dataset used for this study and gives credits t
 
 <span style="background-color:#eeeeee;padding:3px;">
 Install.packages("shiny")  
-shiny::runGitHub("Shiny_Application_and_Reproducible_Pitch", "gaelberon")  
+shiny::runGitHub("fuel_consumption_vs_cars_specificities", "gaelberon")  
 </span>
 
-**Option 3 (local)**: Download the server.R and ui.R files and place them in folder named 'Shiny_Application_and_Reproducible_Pitch'. Open an R session and set the working directory to the folder that contains the directory 'Shiny_Application_and_Reproducible_Pitch'. Then run the following commands:  
+**Option 3 (local)**: Download the server.R and ui.R files and place them in folder named 'fuel_consumption_vs_cars_specificities'. Open an R session and set the working directory to the folder that contains the directory 'fuel_consumption_vs_cars_specificities'. Then run the following commands:  
 
 <span style="background-color:#eeeeee;padding:3px;">
 library(shiny)  
-runApp('Shiny_Application_and_Reproducible_Pitch')  
+runApp('fuel_consumption_vs_cars_specificities')  
 </span>

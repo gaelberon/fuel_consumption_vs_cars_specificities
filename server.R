@@ -3,6 +3,7 @@ library(ggplot2)
 library(shinydashboard)
 library(car)
 library(DT)
+library(ggExtra)
 
 get_scale_dimensions <- function(x_var) {
         
@@ -236,7 +237,6 @@ server <- function(input, output) {
                 anova_df <- as.data.frame(anova(lm(mpg ~ x, Rawdata())))
                 anova_df <- data.frame(x = rownames(anova_df),
                                        anova_df[, 1:length(names(anova_df))])
-                print(anova(lm(mpg ~ x, Rawdata())))
                 return(anova_df)
         })
         
